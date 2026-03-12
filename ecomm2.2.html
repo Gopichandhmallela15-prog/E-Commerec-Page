@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AsiaCart · fresh style with real images</title>
+  <!-- FontAwesome (free) for minor icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    body {
+      background: #eef0f3;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+    .app {
+      width: 100%;
+      max-width: 1600px;
+      background: white;
+      box-shadow: 0 0 30px rgba(0,0,0,0.02);
+    }
+
+    /* ----- LOGIN PAGE (AsiaCart style) ----- */
+    .login-page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      padding: 20px;
+    }
+    .login-box {
+      max-width: 380px;
+      width: 100%;
+      border: 1px solid #d2dbe8;
+      border-radius: 28px;
+      padding: 32px 30px;
+      background: #fff;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.04);
+    }
+    .asia-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-size: 36px;
+      font-weight: 700;
+      color: #1e4f6b;
+      margin-bottom: 16px;
+    }
+    .asia-logo i {
+      color: #e67e22;
+      font-size: 44px;
+    }
+    .login-box h2 {
+      font-size: 26px;
+      font-weight: 500;
+      margin-bottom: 20px;
+      color: #113946;
+    }
+    .login-box label {
+      font-weight: 600;
+      font-size: 13px;
+      color: #2c3e50;
+    }
+    .login-box input {
+      width: 100%;
+      padding: 12px 12px;
+      margin: 8px 0 18px;
+      border: 1px solid #b6c8da;
+      border-radius: 16px;
+      font-size: 15px;
+    }
+    .login-btn {
+      width: 100%;
+      background: #e67e22;
+      border: none;
+      border-radius: 40px;
+      padding: 14px;
+      font-size: 18px;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .login-btn:hover {
+      background: #c96a18;
+    }
+    .legal-note {
+      font-size: 12px;
+      color: #5c6f87;
+      margin: 22px 0 10px;
+    }
+
+    /* ----- MAIN STORE (AsiaCart home) ----- */
+    .store-container {
+      display: none;
+    }
+    .store-container.active {
+      display: block;
+    }
+
+    /* asia header */
+    .asia-header {
+      background: #113946;
+      color: white;
+      padding: 12px 28px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 22px;
+    }
+    .logo {
+      font-size: 28px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .logo i {
+      color: #e67e22;
+    }
+    .deliver {
+      font-size: 13px;
+      background: rgba(255,255,255,0.1);
+      padding: 7px 18px;
+      border-radius: 40px;
+    }
+    .search-bar {
+      flex: 1;
+      display: flex;
+      border-radius: 50px;
+      overflow: hidden;
+      background: white;
+    }
+    .search-bar select {
+      background: #e2eaf1;
+      border: none;
+      padding: 12px;
+      width: 70px;
+    }
+    .search-bar input {
+      flex: 1;
+      border: none;
+      padding: 14px;
+      font-size: 15px;
+    }
+    .search-bar button {
+      background: #e67e22;
+      border: none;
+      padding: 0 28px;
+      cursor: pointer;
+      font-size: 16px;
+      color: white;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-weight: 500;
+      font-size: 15px;
+    }
+
+    /* category strip */
+    .category-strip {
+      background: #1d4e6b;
+      color: white;
+      padding: 12px 28px;
+      display: flex;
+      gap: 32px;
+      font-size: 14px;
+      flex-wrap: wrap;
+    }
+
+    /* hero banners */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+      padding: 28px;
+      background: #eef2f7;
+    }
+    .hero-card {
+      background: white;
+      padding: 22px;
+      border-radius: 28px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    }
+    .badge {
+      background: #d14545;
+      color: white;
+      padding: 5px 12px;
+      border-radius: 40px;
+      font-size: 13px;
+      margin-left: 10px;
+    }
+
+    /* PRODUCT GRID – all real images (unsplash / placeholder) no icons */
+    .deals-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 28px;
+      padding: 28px;
+      background: #eef2f7;
+      justify-content: flex-start;
+    }
+    .product-card {
+      background: white;
+      padding: 18px 16px 22px;
+      width: 230px;
+      border-radius: 28px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.03);
+      border: 1px solid #e2eaf0;
+    }
+    .product-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 30px -10px rgba(20, 50, 70, 0.15);
+    }
+    .product-img {
+      width: 100%;
+      height: 160px;
+      border-radius: 22px;
+      background: #f0f4fa;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+    .product-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .stars {
+      color: #f8b84a;
+      letter-spacing: 1.5px;
+    }
+
+    /* ----- PRODUCT DETAIL PAGE (with big image) ----- */
+    .product-detail-page {
+      display: none;
+      background: white;
+      padding: 30px 40px;
+    }
+    .product-detail-page.active {
+      display: block;
+    }
+    .back-link {
+      margin-bottom: 28px;
+      color: #1d4e6b;
+      cursor: pointer;
+      font-weight: 500;
+      font-size: 16px;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 45px;
+    }
+    .detail-image {
+      background: #f5f8fd;
+      border-radius: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+      height: 420px;
+    }
+    .detail-image img {
+      max-width: 100%;
+      max-height: 360px;
+      border-radius: 30px;
+      object-fit: contain;
+    }
+    .product-info h2 {
+      font-size: 28px;
+      font-weight: 500;
+      color: #113946;
+    }
+    .price-big {
+      font-size: 34px;
+      font-weight: 700;
+      color: #1d4e6b;
+    }
+    .add-cart-btn {
+      background: #e67e22;
+      border: none;
+      color: white;
+      border-radius: 40px;
+      padding: 14px 40px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+      margin-right: 15px;
+    }
+    .buy-now-btn {
+      background: #f39c12;
+      border: none;
+      color: white;
+      border-radius: 40px;
+      padding: 14px 40px;
+      font-weight: 600;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .delivery-box {
+      border-top: 1px solid #d3e0ea;
+      padding: 18px 0;
+      display: flex;
+      gap: 30px;
+    }
+
+    /* checkout */
+    .checkout-page {
+      display: none;
+      background: #f1f5f9;
+      padding: 30px;
+    }
+    .checkout-page.active { display: block; }
+    .checkout-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 38px;
+      padding: 40px;
+    }
+    .place-order {
+      background: #e67e22;
+      border: none;
+      color: white;
+      border-radius: 50px;
+      padding: 16px 40px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+<div class="app">
+  <!-- LOGIN PAGE (AsiaCart) -->
+  <div id="loginPage" class="login-page">
+    <div class="asia-logo"><i class="fas fa-leaf"></i> AsiaCart</div>
+    <div class="login-box">
+      <h2>Welcome back</h2>
+      <label>Email or mobile</label>
+      <input type="text" id="username" value="hello@asiacart.com">
+      <label>Password</label>
+      <input type="password" id="password" value="123456">
+      <button class="login-btn" id="loginBtn">Sign in to AsiaCart</button>
+      <p class="legal-note">By continuing, you agree to AsiaCart's Conditions of Use & Privacy.</p>
+    </div>
+  </div>
+
+  <!-- MAIN STORE (AsiaCart home) -->
+  <div id="storeContainer" class="store-container">
+    <header class="asia-header">
+      <div class="logo"><i class="fas fa-leaf"></i> AsiaCart</div>
+      <div class="deliver"><i class="fas fa-map-marker-alt"></i> Guntur 522509</div>
+      <div class="search-bar"><select><option>All</option></select><input placeholder="Search AsiaCart"><button><i class="fas fa-search"></i></button></div>
+      <div class="nav-links"><span><i class="fas fa-globe"></i> EN</span><span>Hello, Kumar</span><span><i class="fas fa-shopping-cart"></i> Cart</span></div>
+    </header>
+    <div class="category-strip">
+      <span>Fresh</span><span>Bestsellers</span><span>Mobiles</span><span>Fashion</span><span>Electronics</span><span>Home</span><span>Today's Deals</span>
+    </div>
+
+    <!-- hero banners (static) -->
+    <div class="hero-grid">
+      <div class="hero-card"><h3>Shop sarees <span class="badge">Under ₹399</span></h3><p>Exclusive handloom • latest prints</p></div>
+      <div class="hero-card"><h3>Appliances up to 55% off</h3><p>AC, refrigerators, kettle & more</p></div>
+    </div>
+
+    <!-- PRODUCT GRID (dynamic with real images) -->
+    <div style="padding:0 28px 5px 28px; background:#eef2f7;"><h2>Trending now on AsiaCart</h2></div>
+    <div class="deals-grid" id="productGridContainer"></div>
+  </div>
+
+  <!-- PRODUCT DETAIL PAGE (dynamic) -->
+  <div id="productDetailPage" class="product-detail-page">
+    <div class="back-link" id="backToStore"><i class="fas fa-arrow-left"></i> Back to home</div>
+    <div class="detail-grid" id="productDetailContent"></div>
+  </div>
+
+  <!-- CHECKOUT PAGE -->
+  <div id="checkoutPage" class="checkout-page">
+    <div class="checkout-container">
+      <h2 style="margin-bottom: 20px;">Checkout <i class="fas fa-leaf" style="color:#e67e22;"></i></h2>
+      <div id="checkoutProductInfo" style="background:#f7f4ef; padding:22px; border-radius:28px;"></div>
+      <h3 style="margin: 30px 0 15px;">Your details</h3>
+      <div class="customer-form">
+        <input type="text" id="fullName" placeholder="Full name" value="Gopi Chandh">
+        <input type="text" id="address" placeholder="Address" value="2-188, vadlamudi, Guntur">
+        <input type="text" id="pincode" placeholder="Pincode" value="522509">
+        <input type="text" id="mobile" placeholder="Mobile" value="9848048980">
+        <button class="place-order" id="placeOrderBtn"><i class="fas fa-lock"></i> Place order</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  (function() {
+    // 12 items with REAL product images (unsplash / placeholder) – no animated gifs, only static photographs.
+    const products = [
+      { id:1, name:"Men's Linen Cotton Shirt", brand:"NexaFlair", price:469, original:1999, discount:"-77%", rating:3.2, reviews:642, image:"https://images.unsplash.com/photo-1596755094514-f87e34085b38?w=400&h=300&fit=crop&auto=format", color:"GREY" },
+      { id:2, name:"Women's Printed Kurta", brand:"Divastri", price:599, original:1499, discount:"-60%", rating:4.1, reviews:2103, image:"https://images.unsplash.com/photo-1624206112918-f140f087f9b5?w=400&h=300&fit=crop&auto=format", color:"BLUE" },
+      { id:3, name:"Bluetooth Headphones", brand:"BoAt", price:1999, original:3990, discount:"-50%", rating:4.3, reviews:8765, image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=400&h=300&fit=crop&auto=format", color:"BLACK" },
+      { id:4, name:"Smart Watch", brand:"Fire-Boltt", price:2499, original:7999, discount:"-68%", rating:4.0, reviews:3451, image:"https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=400&h=300&fit=crop&auto=format", color:"ROSE" },
+      { id:5, name:"Men's Cotton Trousers", brand:"Peter England", price:1199, original:2699, discount:"-55%", rating:3.9, reviews:1120, image:"https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=400&h=300&fit=crop&auto=format", color:"KHAKI" },
+      { id:6, name:"Noise Cancelling Earbuds", brand:"realme", price:3299, original:6499, discount:"-49%", rating:4.2, reviews:5621, image:"https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=400&h=300&fit=crop&auto=format", color:"WHITE" },
+      { id:7, name:"Women's Saree", brand:"KALINI", price:799, original:2999, discount:"-73%", rating:4.4, reviews:822, image:"https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=400&h=300&fit=crop&auto=format", color:"RED" },
+      { id:8, name:"Laptop Backpack 40L", brand:"Skybags", price:1299, original:2599, discount:"-50%", rating:4.5, reviews:3400, image:"https://images.unsplash.com/photo-1622560480605-d83c853bc5c3?w=400&h=300&fit=crop&auto=format", color:"BLACK" },
+      { id:9, name:"Electric Kettle 1.5L", brand:"Prestige", price:799, original:1495, discount:"-46%", rating:4.3, reviews:7783, image:"https://images.unsplash.com/photo-1594652621385-ae45513a1c43?w=400&h=300&fit=crop&auto=format", color:"SS" },
+      { id:10, name:"Men's Running Shoes", brand:"Campus", price:1399, original:2999, discount:"-53%", rating:4.0, reviews:2901, image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=400&h=300&fit=crop&auto=format", color:"BLUE" },
+      { id:11, name:"Wireless Mouse", brand:"Logitech", price:795, original:1295, discount:"-38%", rating:4.6, reviews:15009, image:"https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=400&h=300&fit=crop&auto=format", color:"BLACK" },
+      { id:12, name:"Men's Hoodie", brand:"US Polo", price:1899, original:3999, discount:"-52%", rating:4.2, reviews:568, image:"https://images.unsplash.com/photo-1556905055-8f358a7a47b2?w=400&h=300&fit=crop&auto=format", color:"GREY" }
+    ];
+
+    let isLoggedIn = false;
+    let currentProduct = null;
+    let cartItem = null;
+
+    const loginPage = document.getElementById('loginPage');
+    const storeContainer = document.getElementById('storeContainer');
+    const productDetailPage = document.getElementById('productDetailPage');
+    const checkoutPage = document.getElementById('checkoutPage');
+    const loginBtn = document.getElementById('loginBtn');
+    const backToStore = document.getElementById('backToStore');
+    const gridContainer = document.getElementById('productGridContainer');
+    const detailContent = document.getElementById('productDetailContent');
+    const checkoutInfo = document.getElementById('checkoutProductInfo');
+
+    function renderProductGrid() {
+      let html = '';
+      products.forEach(p => {
+        html += `<div class="product-card" data-id="${p.id}">
+          <div class="product-img"><img src="${p.image}" alt="${p.name}" loading="lazy"></div>
+          <div style="font-weight:600;">${p.name.substring(0,24)}</div>
+          <div><span class="stars">★★★★★</span> ${p.rating} (${p.reviews})</div>
+          <div><span style="color:#cc0c39;">${p.discount}</span> <strong>₹${p.price}</strong></div>
+          <div style="font-size:13px;">M.R.P. <s>₹${p.original}</s></div>
+        </div>`;
+      });
+      gridContainer.innerHTML = html;
+      document.querySelectorAll('.product-card').forEach(card => {
+        card.addEventListener('click', () => {
+          if (!isLoggedIn) { alert('Please login first'); return; }
+          const id = parseInt(card.dataset.id);
+          currentProduct = products.find(p => p.id === id);
+          if (currentProduct) showDetail(currentProduct);
+        });
+      });
+    }
+
+    function showDetail(p) {
+      storeContainer.classList.remove('active');
+      productDetailPage.classList.add('active');
+      checkoutPage.classList.remove('active');
+      const html = `
+        <div class="detail-image"><img src="${p.image}" alt="${p.name}"></div>
+        <div class="product-info">
+          <div class="brand" style="color:#e67e22;">${p.brand}</div>
+          <h2>${p.name} | ${p.color}</h2>
+          <div class="rating"><span class="stars">★★★★★</span> ${p.rating} (${p.reviews})</div>
+          <div class="price-block" style="margin:15px 0;"><span class="discount">${p.discount}</span> <span class="price-big">₹${p.price}</span> <span class="mrp">M.R.P. <s>₹${p.original}</s></span></div>
+          <div class="fulfilled" style="background:#eaf4e8; padding:10px 18px; border-radius:40px; margin:15px 0;"><i class="fas fa-check-circle" style="color:#2e7d32;"></i> Fulfilled • Free delivery • 10 days return</div>
+          <div class="action-buttons">
+            <button class="add-cart-btn" id="dtlAdd"><i class="fas fa-cart-plus"></i> Add to cart</button>
+            <button class="buy-now-btn" id="dtlBuy"><i class="fas fa-bolt"></i> Buy Now</button>
+          </div>
+          <div class="delivery-box"><i class="fas fa-map-marker-alt"></i> Deliver to Guntur 522509</div>
+        </div>
+      `;
+      detailContent.innerHTML = html;
+      document.getElementById('dtlAdd').addEventListener('click', () => {
+        cartItem = { name: p.name, price: p.price, color: p.color };
+        alert(`✅ Added "${p.name}" to cart.`);
+      });
+      document.getElementById('dtlBuy').addEventListener('click', () => {
+        cartItem = { name: p.name, price: p.price, color: p.color };
+        productDetailPage.classList.remove('active');
+        checkoutPage.classList.add('active');
+        checkoutInfo.innerHTML = `<p><strong>${p.name}</strong> - ${p.color}</p><p>Price: ₹${p.price}</p><p>Delivery: Guntur 522509</p>`;
+      });
+    }
+
+    loginBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      loginPage.style.display = 'none';
+      storeContainer.classList.add('active');
+      isLoggedIn = true;
+    });
+
+    backToStore.addEventListener('click', () => {
+      productDetailPage.classList.remove('active');
+      storeContainer.classList.add('active');
+    });
+
+    document.getElementById('placeOrderBtn').addEventListener('click', () => {
+      const name = document.getElementById('fullName').value || 'Arun';
+      const address = document.getElementById('address').value || 'Guntur';
+      alert(`🎉 Order placed!\nName: ${name}\nAddress: ${address}\nItem: ${cartItem ? cartItem.name : 'Product'}`);
+      checkoutPage.classList.remove('active');
+      storeContainer.classList.add('active');
+    });
+
+    // continue shopping from checkout
+    const backLink = document.createElement('div');
+    backLink.className = 'back-link';
+    backLink.innerHTML = '<i class="fas fa-arrow-left"></i> Continue shopping';
+    backLink.style.marginBottom = '20px'; backLink.style.cursor = 'pointer';
+    backLink.addEventListener('click', () => {
+      checkoutPage.classList.remove('active');
+      storeContainer.classList.add('active');
+    });
+    document.querySelector('.checkout-container').prepend(backLink);
+
+    renderProductGrid();
+  })();
+</script>
+<style>
+  .store-container, .product-detail-page, .checkout-page { display: none; }
+  .store-container.active, .product-detail-page.active, .checkout-page.active { display: block; }
+  .login-page { display: flex; }
+  img { border-radius: 22px; background: #f2f6fa; }
+</style>
+</body>
+</html>
